@@ -1,6 +1,6 @@
 <?php
 
-$title = 'Daftar Mahasiswa';
+$title = 'Daftar Barang';
 
 require_once 'layout/header.php';
 

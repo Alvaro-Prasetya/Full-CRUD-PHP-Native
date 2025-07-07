@@ -47,8 +47,8 @@ $mahasiswa = select("SELECT * FROM mahasiswa WHERE id_mahasiswa = $id_mahasiswa"
         <tr>
             <td width="50%">Foto</td>
             <td>
-                <a href="assets/img/foto.png">
-                    <img src="assets/img/foto.png" alt="foto" width="50%">
+                <a href="assets/img/<?= $mahasiswa['foto'] ?>">
+                    <img src="assets/img/<?= $mahasiswa['foto'] ?>" alt="foto" width="50%">
                 </a>
             </td>
         </tr>

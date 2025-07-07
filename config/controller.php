@@ -1,6 +1,7 @@
 <?php
 
-function dd($value) {
+function dd($value)
+{
     echo '<pre>';
     echo var_dump($value);
     echo '</pre>';
@@ -57,7 +58,6 @@ function update_barang($post)
     mysqli_query($db, $query);
 
     return mysqli_affected_rows($db);
-
 }
 
 // fungsi menghapus data barang
@@ -71,4 +71,72 @@ function delete_barang($id_barang)
     mysqli_query($db, $query);
 
     return mysqli_affected_rows($db);
+}
+
+// fungsi menambahkan data mahasiswa 
+function create_mahasiswa($post)
+{
+    global $db;
+
+    $nama = $post['nama'];
+    $prodi = $post['prodi'];
+    $jenis_kelamin = $post['jenis_kelamin'];
+    $no_telepon = $post['no_telepon'];
+    $email = $post['email'];
+    $foto = upload_file();
+
+    //check uploud foto
+    if (!$foto) {
+        return false;
+    }
+
+    //query tambahkan data mahasiswa
+    $query = "INSERT INTO mahasiswa VALUES(null, '$nama', '$prodi', '$jenis_kelamin', '$no_telepon', '$email', '$foto')";
+
+    mysqli_query($db, $query);
+
+    return mysqli_affected_rows($db);
+}
+
+// fungsi menguploud file
+function upload_file()
+{
+    $namaFile = $_FILES['foto']['name'];
+    $ukuranFile = $_FILES['foto']['size'];
+    $error = $_FILES['foto']['error'];
+    $tmpName = $_FILES['foto']['tmp_name'];
+
+    //chech file yang diuploud
+    $extensifileValid = ['jpg', 'jpeg', 'png'];
+    $extensifile      = explode('.', $namaFile);
+    $extensifile      = strtolower(end($extensifile));
+
+    // chech format/extensi file
+    if (!in_array($extensifile, $extensifileValid)) {
+        //pesan gagal
+        echo "<script>
+                alert('Format File Tidak Valid');
+                document.location.href = 'tambah-mahasiswa.php';
+            </script>";
+        die();
+    }
+
+    //chech ukuran file 5 MB
+    if ($ukuranFile > 5000000) {
+        //pesan gagal
+        echo "<script>
+                alert('ukuran File max 5 MB');
+                document.location.href = 'tambah-mahasiswa.php';
+            </script>";
+        die();
+    }
+
+    // generate nama file baru
+    $namafileBaru = uniqid();
+    $namafileBaru .= '.';
+    $namafileBaru .= $extensifile;
+
+    // pindahkan ke folfer local 
+    move_uploaded_file($tmpName, 'assets/img/' . $namafileBaru);
+    return $namafileBaru;
 }
