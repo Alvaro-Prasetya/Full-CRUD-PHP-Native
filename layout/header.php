@@ -17,6 +17,9 @@
     <script src="https://cdn.datatables.net/2.3.2/js/dataTables.js"></script>
     <script src="https://cdn.datatables.net/2.3.2/js/dataTables.bootstrap5.js"></script>
 
+    <!-- cdn font-awesome -->
+     <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc" crossorigin="anonymous"></script>
+
     <title><?= $title ?></title>
 </head>
 
@@ -37,7 +40,7 @@
                             <a class="nav-link" href="mahasiswa.php">Mahasiswa</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Modal</a>
+                            <a class="nav-link" href="crud-modal.php">Modal</a>
                         </li>
                     </ul>
                 </div>
