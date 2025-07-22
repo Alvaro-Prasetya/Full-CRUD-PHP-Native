@@ -1,5 +1,24 @@
 <?php
 
+session_start();
+
+//membatasi halaman sebelum login
+if (!isset($_SESSION["login"])) {
+    echo "<script>
+            alert('Anda belum Login')
+            document.location.href = 'login.php';
+            </script>";
+}
+
+//membatasi halaman sesuai user login
+if ($_SESSION["level"] != 1 and $_SESSION["level"] != 3 )  {
+    echo "<script>
+            alert('perhatian anda tidak memiliki hak akses');
+            document.location.href = 'crud-modal.php';   
+            </script>";
+        exit;
+}
+
 $title = 'Daftar Mahasiswa';
 
 include 'layout/header.php';
@@ -15,6 +34,10 @@ $data_mahasiswa = select("SELECT * FROM mahasiswa ORDER BY id_mahasiswa DESC");
     <hr>
 
     <a href="tambah-mahasiswa.php" class="btn btn-primary mb-1"><i class="fas fa-plus-circle"></i> Tambah</a>
+
+    <a href="download-excel-mahasiswa.php" class="btn btn-success mb-1"><i class="fas fa-file-excel"></i> Download Excel</a>
+
+    <a href="download-pdf-mahasiswa.php" class="btn btn-danger mb-1"><i class="fas fa-file-pdf"></i> Download PDF</a>
 
     <table class="table table-bordered table-striped mt-3" id="tabel">
         <thead>

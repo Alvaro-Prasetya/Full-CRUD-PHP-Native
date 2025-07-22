@@ -1,5 +1,15 @@
 <?php
 
+session_start();
+
+//membatasi halaman sebelum login
+if (!isset($_SESSION["login"])) {
+    echo "<script>
+            alert('Anda belum Login')
+            document.location.href = 'login.php';
+            </script>";
+}
+
 $title = 'Detail Mahasiswa';
 
 include 'layout/header.php';
@@ -37,6 +47,11 @@ $mahasiswa = select("SELECT * FROM mahasiswa WHERE id_mahasiswa = $id_mahasiswa"
         <tr>
             <td>telepon</td>
             <td> <?= $mahasiswa['no_telepon']; ?></td>
+        </tr>
+
+        <tr>
+            <td>Alamat</td>
+            <td> <?= $mahasiswa['alamat']; ?></td>
         </tr>
 
         <tr>

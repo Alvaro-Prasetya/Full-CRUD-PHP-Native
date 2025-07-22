@@ -1,5 +1,15 @@
 <?php
 
+session_start();
+
+//membatasi halaman sebelum login
+if (!isset($_SESSION["login"])) {
+    echo "<script>
+            alert('Anda belum Login')
+            document.location.href = 'login.php';
+            </script>";
+}
+
 $title = 'Daftar Mahasiswa';
 
 require_once 'layout/header.php';
@@ -53,6 +63,11 @@ if (isset($_POST['tambah'])) {
         <div class="mb-3">
             <label for="no_telepon" class="form-label">telepon</label>
             <input type="number" class="form-control" id="no_telepon" name="no_telepon" placeholder="Telepon..." required>
+        </div>
+
+        <div class="mb-3">
+            <label for="alamat" class="form-label">Alamat</label>
+            <textarea name="alamat" id="alamat"></textarea>
         </div>
 
         <div class="mb-3">

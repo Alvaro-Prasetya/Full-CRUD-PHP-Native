@@ -1,0 +1,13 @@
+# Menyembunyikan list file/direktori
+
+    Options -Indexes
+
+# Menyembunyikan signature/tanda server
+ServerSignature Off
+
+# memblokir/membuka akses ip address
+Order Allow,Deny
+    Allow from 127.0.0.1
+Allow from all
+
+# redirect/mengalihkan ke url lain

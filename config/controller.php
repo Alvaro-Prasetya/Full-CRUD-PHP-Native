@@ -30,12 +30,13 @@ function create_barang($post)
 {
     global $db;
 
-    $nama = strip_tags($post['nama']);
-    $jumlah = strip_tags($post['jumlah']);
-    $harga = strip_tags($post['harga']);
+    $nama       = strip_tags($post['nama']);
+    $jumlah     = strip_tags($post['jumlah']);
+    $harga      = strip_tags($post['harga']);
+    $barcode    = rand(100000, 999999); // Generate a random barcode    
 
     // query tambah data
-    $query = "INSERT INTO barang VALUES(null, '$nama', '$jumlah', '$harga', CURRENT_TIMESTAMP())";
+    $query = "INSERT INTO barang VALUES(null, '$nama', '$jumlah', '$harga', '$barcode', CURRENT_TIMESTAMP())";
 
     mysqli_query($db, $query);
 
@@ -47,10 +48,10 @@ function update_barang($post)
 {
     global $db;
 
-    $id_barang = $post['id_barang'];
-    $nama = strip_tags($post['nama']);
-    $jumlah = strip_tags($post['jumlah']);
-    $harga = strip_tags($post['harga']);
+    $id_barang  = $post['id_barang'];
+    $nama       = strip_tags($post['nama']);
+    $jumlah     = strip_tags($post['jumlah']);
+    $harga      = strip_tags($post['harga']);
 
     // query tambah data
     $query = "UPDATE barang SET nama = '$nama', jumlah = '$jumlah', harga = '$harga' WHERE id_barang = $id_barang";
@@ -82,6 +83,7 @@ function create_mahasiswa($post)
     $prodi = strip_tags($post['prodi']);
     $jenis_kelamin = strip_tags($post['jenis_kelamin']);
     $no_telepon = strip_tags($post['no_telepon']);
+    $alamat = $post['alamat'];
     $email = strip_tags($post['email']);
     $foto = upload_file();
 
@@ -91,7 +93,7 @@ function create_mahasiswa($post)
     }
 
     //query tambahkan data mahasiswa
-    $query = "INSERT INTO mahasiswa VALUES(null, '$nama', '$prodi', '$jenis_kelamin', '$no_telepon', '$email', '$foto')";
+    $query = "INSERT INTO mahasiswa VALUES(null, '$nama', '$prodi', '$jenis_kelamin', '$no_telepon', '$alamat', '$email', '$foto')";
 
     mysqli_query($db, $query);
 
@@ -107,6 +109,7 @@ function update_mahasiswa($post) {
     $prodi = strip_tags($post['prodi']);
     $jenis_kelamin = strip_tags($post['jenis_kelamin']);
     $no_telepon = strip_tags($post['no_telepon']);
+    $alamat = $post['alamat'];
     $email = strip_tags($post['email']);
     $fotoLama = strip_tags($post['fotoLama']);
 
@@ -118,7 +121,7 @@ function update_mahasiswa($post) {
     }
 
     //query update data
-    $query = "UPDATE mahasiswa SET nama = '$nama', prodi = '$prodi', jenis_kelamin = '$jenis_kelamin', no_telepon = '$no_telepon', email = '$email', foto = '$foto' WHERE id_mahasiswa = $id_mahasiswa";
+    $query = "UPDATE mahasiswa SET nama = '$nama', prodi = '$prodi', jenis_kelamin = '$jenis_kelamin', no_telepon = '$no_telepon', alamat = '$alamat', email = '$email', foto = '$foto' WHERE id_mahasiswa = $id_mahasiswa";
 
     mysqli_query($db, $query);
 
